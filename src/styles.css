@@ -1,1 +1,11 @@
 /* You can add global styles to this file, and also import other style files */
+@import "~bootstrap/dist/css/bootstrap.min.css";
+
+.submit-btn{
+  max-width: 150px;
+}
+
+.addUpadateForm{
+  max-width: 500px;
+  width: 100%;
+}
