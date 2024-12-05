@@ -1,0 +1,87 @@
+<div class="">
+  <div class="d-flex justify-content-between align-items-center">
+    <h1>Home Component</h1>
+    <div *ngIf="searchForm">
+      <form [formGroup]="searchForm" class="d-flex align-items-center">
+        <input
+          type="text"
+          placeholder="Search"
+          class="me-2"
+          formControlName="searchInt"
+        />
+        <button class="btn btn-primary" (click)="searchPost()">Search</button>
+      </form>
+    </div>
+    <button class="btn-primary" routerLink="/post">Add Post</button>
+  </div>
+
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Title</th>
+        <th scope="col">Body</th>
+        <th scope="col">Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let post of resultPosts">
+        <th scope="row">{{ post?.["id"] }}</th>
+        <td>
+          {{ post?.["title"] }}
+        </td>
+        <td>{{post?.["body"]}}</td>
+        <td>
+          <button (click)="open(content, post?.['id'])">dlt</button>
+          <button routerLink="/post/{{post?.['id']}}">edit</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="d-flex justify-content-between">
+    <div ngbDropdown class="d-inline-block">
+      <select
+        #perPageEle
+        class="form-select"
+        name="perPage"
+        id="perPage"
+        (change)="perPageVal(perPageEle.value)"
+      >
+        <option value="10" selected>10</option>
+        <option value="50">50</option>
+        <option value="100">100</option>
+      </select>
+    </div>
+    <ngb-pagination
+      class="float-end mb-4"
+      [collectionSize]="postLength"
+      [pageSize]="perPage"
+      [(page)]="currPage"
+      (pageChange)="pageChange(currPage)"
+      [directionLinks]="false"
+    />
+  </div>
+</div>
+
+<ng-template #content let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title">Post delete ???</h4>
+  </div>
+  <div class="modal-body d-flex justify-content-end">
+    <button
+      type="button"
+      class="btn btn-outline-danger me-3"
+      (click)="modal.close()"
+    >
+      Delete Post
+    </button>
+    <button
+      type="button"
+      class="btn btn-outline-secondary"
+      (click)="modal.dismiss()"
+    >
+      Cancel
+    </button>
+  </div>
+</ng-template>

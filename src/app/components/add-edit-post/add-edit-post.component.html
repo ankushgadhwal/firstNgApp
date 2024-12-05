@@ -1,0 +1,52 @@
+<h1>Create/update Post</h1>
+
+<div *ngIf="addUpdateForm">
+  <form
+    [formGroup]="addUpdateForm"
+    class="d-flex flex-column gap-3"
+  >
+    <div>
+      <label class="d-block mb-1" for="title">Title</label>
+      <input
+        class="addUpadateForm"
+        type="text"
+        name="title"
+        formControlName="title"
+        placeholder="Title"
+      />
+      <span
+        *ngIf="
+          addUpdateForm.get('title')?.invalid &&
+          addUpdateForm.get('title')?.touched
+        "
+        >Please fill the title</span
+      >
+    </div>
+
+    <div>
+      <label class="d-block mb-1" for="body">Body</label>
+      <input
+        class="addUpadateForm"
+        type="text"
+        name="body"
+        formControlName="body"
+        placeholder="Body"
+      />
+      <span
+        *ngIf="
+          addUpdateForm.get('title')?.invalid &&
+          addUpdateForm.get('title')?.touched
+        "
+        >Please fill the body</span
+      >
+    </div>
+    <button
+      type="submit"
+      class="submit-btn"
+      (click)="addUpdateSubmit()"
+      [disabled]="addUpdateForm.invalid"
+    >
+      Submit
+    </button>
+  </form>
+</div>
